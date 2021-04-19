@@ -91,7 +91,12 @@ export class Xero implements INodeType {
 			// select them easily
 			async getItemCodes(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
 				const organizationId = this.getCurrentNodeParameter('organizationId');
-				const returnData: INodePropertyOptions[] = [];
+				const returnData: INodePropertyOptions[] = [
+					{
+						name: 'None',
+						value: '',
+					},
+				];
 				const { Items: items } = await xeroApiRequest.call(this, 'GET', '/items', { organizationId });
 				for (const item of items) {
 					const itemName = item.Description;
